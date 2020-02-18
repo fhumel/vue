@@ -7,7 +7,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import response from "vue-resource/src/http/response";
-import VeeValidate from 'vee-validate';
+import * as VeeValidate from 'vee-validate';
 
 
 Vue.use(BootstrapVue);
