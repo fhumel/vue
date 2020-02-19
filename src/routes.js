@@ -7,49 +7,49 @@ const router = new VueRouter({
   routes: [
     {
       path: "/login",
-      component: require('./components/authentication/Login'),
+      component: require('./components/authentication/Login.vue').default,
       meta: {
         forVisitors: true
       }
     },
     {
       path: "/register" ,
-      component: require('./components/authentication/Register'),
+      component: require('./components/authentication/Register').default,
       meta: {
         forVisitors: true
       }
     },
     {
       path: "/chat",
-      component: require('./components/Chat'),
+      component: require('./components/Chat').default,
       meta: {
         forVisitors: true
       }
     },
     {
       path: "/chatPrivado",
-      component: require('./components/ChatPrivado'),
+      component: require('./components/ChatPrivado').default,
       meta: {
         forVisitors: true
       }
     },
     {
       path: "/feed",
-      component: require('./components/Feed'),
+      component: require('./components/Feed').default,
       meta: {
         forAuth: true
       }
     },
     {
       path: "/products/create",
-      component: require('./components/product/Create'),
+      component: require('./components/product/Create').default,
       meta: {
         forAuth: true
       }
     },
     {
       path: "/products/:product/edit",
-      component: require('./components/product/Edit'),
+      component: require('./components/product/Edit').default,
       meta: {
         forAuth: true
       }
