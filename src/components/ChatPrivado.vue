@@ -135,6 +135,7 @@
 
             //The send method stores the user message and emit an event to the server.
             send() {
+            this.ready = true;
                 this.messages.push({
                     message: this.newMessage,
                     type: 0,
@@ -153,6 +154,8 @@
                     user: this.username,
                     toUser: this.toUser
                 });
+
+                console.log(this.username);
 
                 this.newMessage = null;
             },
