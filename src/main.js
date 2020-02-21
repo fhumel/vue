@@ -8,6 +8,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import response from "vue-resource/src/http/response";
 import * as VeeValidate from 'vee-validate';
+import socket from 'socket.io-client';
+socket('http://31.220.51.155/');
+Vue.socket = socket;
 
 
 Vue.use(BootstrapVue);

@@ -50,9 +50,6 @@
 
 <script>
 
-    import io from 'socket.io-client';
-    const socket = io('http://localhost:5001');
-
     export  default  {
         data () {
             return {
@@ -73,11 +70,11 @@
 
             // Emitting 'leave' event on tab closed event.
             window.onbeforeunload = () => {
-                socket.emit('leave', this.username);
+                this.socket.emit('leave', this.username);
             }
 
             // Listening to chat-message event emitted from the server and pushing to messages array
-            socket.on('chat-message', (data) => {
+            this.socket.on('chat-message', (data) => {
                 this.messages.push({
                     message: data.message,
                     type: 1,
@@ -87,15 +84,15 @@
 
 
             // Listening to typing event emitted from the server and setting the data (username) to the UI
-            socket.on('typing', (data) => {
+            this.socket.on('typing', (data) => {
                 this.typing = data;
             });
             // Listening to stopTyping event emitted from the server and setting the typing property to false
-            socket.on('stopTyping', () => {
+            this.socket.on('stopTyping', () => {
                 this.typing = false;
             });
             // Listening to 'joined' event emitted from the server and pushing the data to info array
-            socket.on('joined', (data) => {
+            this.socket.on('joined', (data) => {
                 this.info.push({
                     username: data,
                     type: 'joined'
@@ -106,7 +103,7 @@
                 }, 5000);
             });
             // Listening to 'leave' event emitted from the server and pushing the data to info array
-            socket.on('leave', (data) => {
+            this.socket.on('leave', (data) => {
                 this.info.push({
                     username: data,
                     type: 'left'
@@ -118,7 +115,7 @@
                 }, 5000);
             });
             // Listening to 'connections' event emitted from the server to get the total number of connected clients
-            socket.on('connections', (data) => {
+            this.socket.on('connections', (data) => {
                 this.connections = data;
             });
         },
@@ -127,7 +124,7 @@
 
             // Watching for changes in the message inbox box and emitting the either 'typing' or 'stopTyping' event
             newMessage(value) {
-                value ? socket.emit('typing', this.username) : socket.emit('stopTyping')
+                value ? this.socket.emit('typing', this.username) : this.socket.emit('stopTyping')
             }
         },
         //Vue Methods hook
@@ -149,7 +146,7 @@
                 // });
 
                 //for private
-                socket.emit('private-message', {
+                this.socket.emit('private-message', {
                     message: this.newMessage,
                     user: this.username,
                     toUser: this.toUser
@@ -162,7 +159,7 @@
             // The addUser method emit a 'joined' event with the username and set the 'ready' property to true.
             addUser() {
                 this.ready = true;
-                socket.emit('add-user', this.username)
+                this.socket.emit('add-user', this.username)
             }
         },
     };
