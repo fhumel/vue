@@ -46,7 +46,7 @@
               var data = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'PLw9iaS101VIS626dYoY4KmNRqwFjlrjxUcR3kZ0',
+                client_secret: 'Vgbyr7A2Oij3OsukYIOHEonAdS27RNlf3oJ2lp7v',
                 username: this.username,
                 password: this.password,
               }
