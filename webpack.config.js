@@ -93,7 +93,9 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: '"production"',
+        ENDPOINT: '"31.220.51.155:8000"',
+        SOCKET: '"31.220.51.155:5001"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -106,4 +108,18 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     })
   ])
+}
+
+if (process.env.NODE_ENV === 'development') {
+
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"development"',
+        ENDPOINT: '"localhost:8000"',
+        SOCKET: '"localhost:5001"'
+      }
+    })
+  ]);
+
 }

@@ -51,7 +51,7 @@
 <script>
 
     import io from 'socket.io-client';
-    const socket = io('31.220.51.155:5001');
+    const socket = io(process.env.SOCKET);
 
     export  default  {
         data () {

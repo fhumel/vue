@@ -15,7 +15,7 @@ Vue.use(VueResource)
 Vue.use(Auth)
 Vue.use(VeeValidate)
 
-Vue.http.options.root = 'http://31.220.51.155:8000'
+Vue.http.options.root = process.env.ENDPOINT;
 Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
 
 Vue.http.interceptors.push((request, next) => {
