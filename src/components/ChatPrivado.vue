@@ -7,17 +7,7 @@
             </p>
         </div>
 
-        <div v-if="!ready">
-            <h4>Enter your username</h4>
-            <form @submit.prevent="addUser">
-                <div class="form-group row">
-                    <input type="text" class="form-control col-9" v-model="username"
-                           placeholder="Enter username here">
-                    <input type="submit" value="Join" class="btn btn-sm btn-info ml-1">
 
-                </div>
-            </form>
-        </div>
         <h2 v-else>{{username}}</h2>
         <div class="card bg-info" v-if="ready">
             <div class="card-header text-white">
@@ -60,7 +50,7 @@
                 toUser: null,
                 messages: [],
                 typing: false,
-                username: null,
+                username: localStorage.getItem('email'),
                 ready: false,
                 info: [],
                 connections: 0,
@@ -70,6 +60,10 @@
 
         // Our vue created method
         created() {
+
+            socket.emit('add-user', localStorage.getItem('email'))
+
+            this.ready = true;
 
             // Emitting 'leave' event on tab closed event.
             window.onbeforeunload = () => {
@@ -127,7 +121,7 @@
 
             // Watching for changes in the message inbox box and emitting the either 'typing' or 'stopTyping' event
             newMessage(value) {
-                value ? socket.emit('typing', this.username) : socket.emit('stopTyping')
+                value ? socket.emit('typing', localStorage.getItem('email')) : socket.emit('stopTyping')
             }
         },
         //Vue Methods hook
@@ -139,7 +133,7 @@
                 this.messages.push({
                     message: this.newMessage,
                     type: 0,
-                    user: 'Me',
+                    user: localStorage.getItem('email'),
                 });
 
                 //for chat
@@ -151,19 +145,16 @@
                 //for private
                 socket.emit('private-message', {
                     message: this.newMessage,
-                    user: this.username,
-                    toUser: this.toUser
+                    user:  localStorage.getItem('email'),
+                    toUser: this.toUser,
+                    token: localStorage.getItem('token')
                 });
 
                 console.log(this.username);
 
                 this.newMessage = null;
             },
-            // The addUser method emit a 'joined' event with the username and set the 'ready' property to true.
-            addUser() {
-                this.ready = true;
-                socket.emit('add-user', this.username)
-            }
+
         },
     };
 </script>

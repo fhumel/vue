@@ -20,10 +20,6 @@
 				</form>
 			</div>
 
-  <pre>
-    {{ $data }}
-  </pre>
-
     	</div>
 
 
@@ -46,7 +42,7 @@
               var data = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'Vgbyr7A2Oij3OsukYIOHEonAdS27RNlf3oJ2lp7v',
+                client_secret: 'SLSrFO6CzZbc3wm25e1i6chw3fNFpIEuxGGOhZ2T',
                 username: this.username,
                 password: this.password,
               }
@@ -55,12 +51,12 @@
                   .then(function (response) {
                       this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
 
-                      // var data = "Bearer "  + response.body.access_token;
-                      //
-                      // this.$http.get("api/auth/user"+{Authorization:data})
-                      //     .then(function (response) {
-                      //         this.$auth.setUser(response.body.name)
-                      //     })
+                      var data = "Bearer "  + response.body.access_token;
+
+                      this.$http.get("api/user")
+                          .then(function (response) {
+                              this.$auth.setUser(response.body.email);
+						  })
                       this.$router.push("/feed")
                   })
           }

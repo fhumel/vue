@@ -6,7 +6,7 @@
 
 		<div class="row kpx_row-sm-offset-3">
 			<div class="col-xs-12 col-sm-6">
-			    <form class="kpx_loginForm" action="" autocomplete="off" method="POST">
+			    <form class="kpx_loginForm" autocomplete="off" >
 					<div class="input-group">
 						<span class="input-group-addon"><span class="fa fa-user"></span></span>
 						<input type="text" class="form-control" v-model="name" placeholder="name">
@@ -14,7 +14,7 @@
                     <hr />
 					<div class="input-group">
 						<span class="input-group-addon"><span class="fa fa-user"></span></span>
-						<input type="text" class="form-control" v-model="email" placeholder="Username">
+						<input type="email" class="form-control" v-model="email" placeholder="email">
 					</div>
                     <hr />
 					<div class="input-group">
@@ -28,15 +28,10 @@
 						<input  type="password" class="form-control" v-model="password" placeholder="Password">
 					</div>
                     <hr />
-					<button class="btn btn-lg btn-outline-primary btn-block" type="submit"><i class="fa fa-sign-in"></i> Register</button>
+					<button type="button" @click="register" class="btn btn-lg btn-outline-primary btn-block" ><i class="fa fa-sign-in"></i> Register</button>
 				</form>
 			</div>
         </div>
-
-  <pre>
-    {{ $data }}
-  </pre>
-
 
 </div>
 
@@ -51,7 +46,25 @@
               name: '',
               password_confirmation: ''
           }
-      }
+
+  },
+
+  methods: {
+	  register () {
+
+		  var data = {
+			  email: this.email,
+			  name: this.name,
+			  password: this.password,
+			  password_confirmation: this.password_confirmation,
+		  }
+
+		  this.$http.post("api/signup", data)
+				  .then(function (response) {
+					 console.log(response);
+				  })
+	  }
+  }
   }
 </script>
 

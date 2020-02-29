@@ -44,7 +44,7 @@
 
     methods: {
         setAuthenticatedUser() {
-          this.$http.post('api/user')
+          this.$http.get('api/user')
               .then( response => {
                   this.$auth.setAuthenticatedUser(response.body)
                   console.log(this.$auth.getAuthenticatedUSer())

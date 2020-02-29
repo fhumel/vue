@@ -9,13 +9,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import response from "vue-resource/src/http/response";
 import * as VeeValidate from 'vee-validate';
 
-
 Vue.use(BootstrapVue);
 Vue.use(VueResource)
 Vue.use(Auth)
 Vue.use(VeeValidate)
 
 Vue.http.options.root = process.env.ENDPOINT;
+Vue.http.headers.common['Access-Control-Allow-Origin'] = true;
+Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
+Vue.http.options.emulateHTTP = true;
 Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
 
 Vue.http.interceptors.push((request, next) => {

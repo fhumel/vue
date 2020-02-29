@@ -23,19 +23,26 @@ const router = new VueRouter({
       path: "/chat",
       component: require('./components/Chat').default,
       meta: {
-        forVisitors: true
+        forAuth: true
       }
     },
     {
       path: "/chatPrivado",
       component: require('./components/ChatPrivado').default,
       meta: {
-        forVisitors: true
+        forAuth: true
       }
     },
     {
       path: "/feed",
       component: require('./components/Feed').default,
+      meta: {
+        forAuth: true
+      }
+    },
+    {
+      path: "/logout",
+      component: require('./components/authentication/Logout').default,
       meta: {
         forAuth: true
       }
@@ -50,6 +57,20 @@ const router = new VueRouter({
     {
       path: "/products/:product/edit",
       component: require('./components/product/Edit').default,
+      meta: {
+        forAuth: true
+      }
+    },
+    {
+      path: "/feed",
+      component: require('./components/profile/profiles').default,
+      meta: {
+        forAuth: true
+      }
+    },
+    {
+      path: "/profile/:profile/",
+      component: require('./components/profile/details').default,
       meta: {
         forAuth: true
       }

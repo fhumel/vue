@@ -94,8 +94,8 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
-        ENDPOINT: '"31.220.51.155:8000"',
-        SOCKET: '"31.220.51.155:5001"'
+        ENDPOINT: '"http://31.220.51.155:8000"',
+        SOCKET: '"http://31.220.51.155:5001"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -116,8 +116,8 @@ if (process.env.NODE_ENV === 'development') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"development"',
-        ENDPOINT: '"localhost:8000"',
-        SOCKET: '"localhost:5001"'
+        ENDPOINT: '"http://localhost:8000"',
+        SOCKET: '"http://localhost:5001"'
       }
     })
   ]);

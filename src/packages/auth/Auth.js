@@ -8,8 +8,13 @@ export default function (Vue) {
       localStorage.setItem('expiration', expiration)
     },
 
-    setUser: (name) => {
-      localStorage.setItem('name', name)
+    setUser: (email) => {
+      localStorage.setItem('email', email)
+    },
+
+    getUser: () => {
+      email = localStorage.getItem('email')
+      return email;
     },
 
     getToken () {
