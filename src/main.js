@@ -18,9 +18,10 @@ Vue.http.options.root = process.env.ENDPOINT;
 Vue.http.headers.common['Access-Control-Allow-Origin'] = true;
 Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
 Vue.http.options.emulateHTTP = true;
-Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
+
 
 Vue.http.interceptors.push((request, next) => {
+    Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
   if(response.status == 404)
     swal(response.status.toString(), response.body.error, 'error')
   else if(response.status == 404)

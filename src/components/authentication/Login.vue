@@ -56,8 +56,11 @@
                       this.$http.get("api/user")
                           .then(function (response) {
                               this.$auth.setUser(response.body.email);
+							  this.$auth.setAuthenticatedUser(response.body)
+							  this.$router.push("/feed")
 						  })
-                      this.$router.push("/feed")
+
+
                   })
           }
       }

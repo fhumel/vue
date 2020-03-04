@@ -25,7 +25,7 @@
 
         computed: {
           authenticatedUser() {
-              return this.$auth.getAuthenticatedUSer()
+              return this.$auth.getAuthenticatedUser()
           }
         },
 

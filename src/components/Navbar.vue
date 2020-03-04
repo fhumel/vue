@@ -17,10 +17,7 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-
-
-          <router-link class="nav-link" tag="a" active-class="active" to="/logout"  v-if=" isAuth">Logout</router-link>
-
+          <router-link class="nav-link" tag="a" active-class="active" to="/logout"  v-on:click.native="logout()" v-if=" isAuth">Logout</router-link>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -36,20 +33,30 @@
         isAuth: null
       }
     },
+    computed: {
+      authenticatedUser () {
+        return this.getAuthenticatedUser()
+      }
+    },
 
     created() {
       this.isAuth = this.$auth.isAuthenticated()
       this.setAuthenticatedUser()
     },
-
     methods: {
-        setAuthenticatedUser() {
-          this.$http.get('api/user')
-              .then( response => {
-                  this.$auth.setAuthenticatedUser(response.body)
-                  console.log(this.$auth.getAuthenticatedUSer())
-              })
-        }
+      setAuthenticatedUser () {
+        this.$http.get('api/user')
+                .then( response => {
+                  this.$auth.setAuthenticatedUser(response.data)
+
+                })
+      },
+      getAuthenticatedUser(){
+        return this.$auth.getAuthenticatedUser()
+      },
+      logout() {
+        this.isAuth = false;
+      }
     }
   }
 
